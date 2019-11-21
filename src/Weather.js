@@ -71,7 +71,10 @@ export default function Weather() {
         </footer>
       </div>
       <small>
-        <a href={"https://github.com/Gretelchen/Weather-App"} target={`blanc`}>
+        <a
+          href={"https://github.com/Gretelchen/react-weather-app"}
+          target={`blanc`}
+        >
           this app is opened sourced
         </a>
         <span> by Tanja Klawitter</span>

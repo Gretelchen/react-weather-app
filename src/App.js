@@ -9,12 +9,6 @@ function App() {
       <header className="App-header">
         <div>
           <Weather />
-          <a
-            href="https://github.com/Gretelchen/react-weather-app"
-            target="_blanc"
-          >
-            react-app by Tanja Klawitter
-          </a>
         </div>
         <Loader
           type="Puff"
