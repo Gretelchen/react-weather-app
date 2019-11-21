@@ -1,12 +1,21 @@
 import React from "react";
 import "./App.css";
 import Loader from "react-loader-spinner";
+import Weather from "./Weather";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Hello World</p>
+        <div>
+          <Weather />
+          <a
+            href="https://github.com/Gretelchen/react-weather-app"
+            target="_blanc"
+          >
+            react-app by Tanja Klawitter
+          </a>
+        </div>
         <Loader
           type="Puff"
           color="#00BFFF"
