@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Loader from "react-loader-spinner";
+import FormatDate from "./FormatDate";
 
 export default function Weather(props) {
   const [ready, setReady] = useState(false);
   const [weatherData, setWeatherData] = useState({});
 
   function handleResponse(response) {
-    console.log(response.data);
     setWeatherData({
       iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
       temperature: response.data.main.temp,
-      timestamp: "MON 12:00",
+      timestamp: new Date(response.data.dt * 1000),
       city: response.data.name
     });
     setReady(true);
@@ -31,13 +31,13 @@ export default function Weather(props) {
                 <button
                   className="location-button"
                   type="button"
-                  class="btn btn-outline-light"
+                  className="btn btn-outline-light"
                 >
                   your location
                 </button>
               </div>
               <div className="col-8">
-                <form inline>
+                <form inline="false">
                   <input
                     type="text"
                     placeholder="type your city"
@@ -46,7 +46,7 @@ export default function Weather(props) {
                   <button
                     className="search-button"
                     type="button"
-                    class="btn btn-outline-light"
+                    className="btn btn-outline-light"
                   >
                     Search
                   </button>
@@ -77,7 +77,9 @@ export default function Weather(props) {
           </section>
           <footer>
             <div className="row">
-              <div className="col-6 timestamp">{weatherData.timestamp}</div>
+              <div className="col-6 timestamp">
+                <FormatDate date={weatherData.timestamp} />
+              </div>
               <div className="col-6 city">{weatherData.city}</div>
             </div>
           </footer>
