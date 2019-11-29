@@ -6,6 +6,7 @@ import FormatDate from "./FormatDate";
 export default function Weather(props) {
   const [ready, setReady] = useState(false);
   const [weatherData, setWeatherData] = useState({});
+  const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
     setWeatherData({
@@ -17,6 +18,21 @@ export default function Weather(props) {
     setReady(true);
   }
 
+  function handleSumbmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleChangeCity(event) {
+    setCity(event.target.value);
+  }
+
+  function search() {
+    const apiKey = `2fed1584ca3221a55333f6e6fcb1d723`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
   if (ready) {
     return (
       <div>
@@ -25,34 +41,25 @@ export default function Weather(props) {
             <div className="logo">
               Orange<div>Weather</div>
             </div>
-
-            <div className="row search-engine">
-              <div className="col-4">
-                <button
-                  className="location-button"
-                  type="button"
-                  className="btn btn-outline-light"
-                >
-                  your location
-                </button>
-              </div>
-              <div className="col-8">
-                <form inline="false">
+            <form onSubmit={handleSumbmit}>
+              <div className="row search-engine">
+                <div className="col-10">
                   <input
-                    type="text"
+                    type="search"
                     placeholder="type your city"
-                    className="search-bar"
+                    className="form-control"
+                    onChange={handleChangeCity}
                   />
-                  <button
-                    className="search-button"
-                    type="button"
-                    className="btn btn-outline-light"
-                  >
-                    Search
-                  </button>
-                </form>
+                </div>
+                <div className="col-2">
+                  <input
+                    type="submit"
+                    value="search"
+                    className="btn btn-outline-light search-button"
+                  />
+                </div>
               </div>
-            </div>
+            </form>
           </header>
           <section>
             <div className="row">
@@ -96,9 +103,7 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const apiKey = `2fed1584ca3221a55333f6e6fcb1d723`;
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
+    search();
 
     return (
       <Loader
