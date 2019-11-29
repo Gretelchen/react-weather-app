@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Loader from "react-loader-spinner";
 import FormatDate from "./FormatDate";
+import WeatherTemperature from "./WeatherTemperature";
 
 export default function Weather(props) {
   const [ready, setReady] = useState(false);
@@ -73,12 +74,9 @@ export default function Weather(props) {
                 />
               </div>
               <div className="col-6">
-                <span className="temperature">
-                  {Math.round(weatherData.temperature)}
-                </span>
-                <span className="units">
-                  <a href="/">°C</a> | <a href="/"> °F</a>
-                </span>
+                <WeatherTemperature
+                  celsius={Math.round(weatherData.temperature)}
+                />
               </div>
             </div>
           </section>
