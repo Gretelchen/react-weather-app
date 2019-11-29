@@ -9,7 +9,7 @@ export default function Weather(props) {
 
   function handleResponse(response) {
     setWeatherData({
-      iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
+      iconUrl: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       temperature: response.data.main.temp,
       timestamp: new Date(response.data.dt * 1000),
       city: response.data.name
